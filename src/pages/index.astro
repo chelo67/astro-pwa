@@ -1,0 +1,446 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Jose Perez">		<!-- contenedor-->
+ <div class="contenedor">
+
+	<!-- encabezado --------------------->
+	 <header>
+	  <div class="encabezado" id="header">
+  
+		<div class="perfil">
+  
+		  <div class="foto">
+			<img src="" alt="foto" id="foto-perfil">
+		  </div>
+  
+		  <div class="nombre">
+			<h1 id="nombre"></h1>
+			<p id="puesto"></p>
+		  </div>
+  
+		</div>
+	  </div>
+	</header>
+	
+	 <!-- Contacto ---------------------------------->
+	<section class="contacto">
+	  <div class="redes">
+		<div class="phone" id="color_boton">
+		  <a href="" id="link_phone">
+			<i class="fa-solid fa-phone fa-2x"></i>
+		  </a> 
+		</div>
+		<div class="email" id="color_boton1">
+		  <a href="" id="link_email">
+			<i class="fa-solid fa-envelope fa-2x"></i>
+		  </a>
+		</div>
+		<div class="web" id="color_boton2">
+		  <a href="" id="link_web">
+			<i class="fa-solid fa-globe fa-2x"></i>
+		  </a>
+		</div>
+	  </div>  
+	</section>
+	
+	<!-- informacion -------------------->
+	<section class="informacion">
+	  <div class="info"><i class="fa-solid fa-phone fa-2x"></i><p id="phone"></p></div>
+	  <div class="info"><i class="fa-solid fa-envelope fa-2x"></i><p id="email"></p></div>
+	  <div class="info"><i class="fa-solid fa-globe fa-2x"></i><p id="web"></p></div>
+	</section>
+  
+	<!-- Redes sociales ---------------------->
+	 <section class="title-redes">
+	  Sigueme
+	 </section>
+  
+	 <section class="redes_sociales">
+	  <div class="icon_redes"><a href="" id="link_facebook"><i class="fa-brands fa-facebook fa-2x"></i></a></div>
+	  <div class="icon_redes"><a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2x"></i></a></div>
+	  <div class="icon_redes"><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube fa-2x"></i></a></div>
+	  <div class="icon_redes"><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin fa-2x"></i></a></div>
+	 </section>
+  
+	<!--boton compartir ------------------------------->
+	<section class="botones">  
+	  <div>
+		<a href="https://drive.google.com/file/d/1UGj2wB6M4ZWWjBLPaFMFhDNLt9SCmHj4/view?usp=sharing" class="boton_guardar">
+		  <i class="fa-solid fa-download"></i>
+		  Guardar contacto
+		</a>
+	  </div>
+	  
+	</section>
+
+  
+	<script src="https://kit.fontawesome.com/dbb4fa1064.js" crossorigin="anonymous" is:inline></script>
+
+  <script>
+    async function fetchData() {
+      const apiURL = 'https://comforting-teira-734753.instawp.xyz//wp-json/wp/v2/tarjeta?author=3&acf_format=standard';
+      
+      try {
+        const response = await fetch(apiURL);
+        const tarjetas = await response.json();
+        const tarjeta = tarjetas[0]; // Suponiendo que solo hay un objeto que contiene los datos necesarios
+        
+  
+        // Actualizar la imagen de fondo del encabezado
+        const headerElement = document.getElementById('header');
+        headerElement.style.backgroundImage = `url(${tarjeta.acf.imagen_top})`;
+  
+        // Actualizar la foto de perfil
+        const fotoPerfilElement = document.getElementById('foto-perfil') as HTMLImageElement;;
+        fotoPerfilElement.src = tarjeta.acf.foto;
+  
+        // Actualizar el nombre
+        const nombreElement = document.getElementById('nombre');
+        nombreElement.textContent = tarjeta.acf.nombre;
+  
+        // Actualizar el puesto
+        const puestoElement = document.getElementById('puesto');
+        puestoElement.textContent = tarjeta.acf.puesto;
+  
+        // Actualizar color de los botones de contacto
+        const colorBoton = document.getElementById('color_boton');
+         colorBoton.style.backgroundColor = tarjeta.acf.color_boton_contacto;
+ 
+         //color boton phone
+         const colorBoton1 = document.getElementById('color_boton1');
+         colorBoton1.style.backgroundColor = tarjeta.acf.color_boton_contacto;
+ 
+         //color boton phone
+         const colorBoton2 = document.getElementById('color_boton2') ;
+         colorBoton2.style.backgroundColor = tarjeta.acf.color_boton_contacto;
+        
+        //link telefono
+        const linkPhone = document.getElementById('link_phone') as HTMLAnchorElement;
+        linkPhone.href = `tel:${tarjeta.acf.telefono}`;
+        
+        //link email
+        const linkEmail = document.getElementById('link_email') as HTMLAnchorElement;
+        linkEmail.href = `mailto:${tarjeta.acf.enlace_email}`;
+
+        //link web
+        const linkWeb = document.getElementById('link_web') as HTMLAnchorElement;
+        linkWeb.href = `${tarjeta.acf.enlace_web}`;
+
+        //info telefono
+        const phoneElement = document.getElementById('phone');
+        phoneElement.textContent = tarjeta.acf.telefono;
+
+        //info email
+        const emailElement = document.getElementById('email');
+        emailElement.textContent = tarjeta.acf.enlace_email;
+
+        //info web
+        const webElement = document.getElementById('web');
+        webElement.textContent = tarjeta.acf.enlace_email;
+
+        //enlace facebook
+        const linkFacebook = document.getElementById('link_facebook') as HTMLAnchorElement;
+        linkWeb.href = `${tarjeta.acf.enlace_web}`;
+  
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    }
+  
+    fetchData();
+  
+    // Opcional: Recargar los datos cada cierto tiempo
+    setInterval(fetchData, 60000); // Recarga los datos cada 60 segundos
+  
+  </script>
+
+</Layout>
+
+<style >
+      
+    /* estilos generales */
+   * {
+       margin: 0;
+       padding: 0;
+   }
+   body {
+       height: 100vh;
+       display: flex;
+       justify-content: start;
+       align-items: center;
+       flex-direction: column;
+   }
+   /* contenedor */
+   .contenedor {
+       width: 100%;
+       max-width: 1100px;
+       height: 100%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       
+   }
+   /* encabezado */
+   header {
+       width: 96%;
+       max-width: 1000px;
+       height: 180px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+   .encabezado {
+       width: 100%;
+       height: 180px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       border-radius: 20px 20px 0 0;
+       margin-top: 15px;
+       position: relative;
+   }
+   .perfil {
+       width: 95%;
+       height: 100px;
+       position: absolute;
+       bottom: -40%;
+       display:flex;
+       justify-content: space-between;
+       align-items: center;
+   }
+   
+   .perfil .foto img { 
+       width: 100px;
+       height: 100%;
+       border: 5px solid #fff;
+       border-radius: 50%;
+   }
+   .perfil .nombre{
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       margin-top: 30px;
+   }
+   .nombre  {
+       width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "lobster";
+       	color: #484848;
+       	font-size: 0.9rem; 
+   }
+   
+   .perfil .nombre p {
+       font-family: "Poppins";
+       margin-top: 0px;
+	   color: #484848;
+   }
+   /* contacto */
+   .contacto {
+       width: 100%;
+       height: 100px;
+       position: relative;
+       display: flex;
+       margin-top: 100px;
+   }
+   .contacto .redes {
+       width: 100%;
+       display: flex;
+       justify-content: space-evenly;
+    
+   }
+   .phone, .email, .web {
+       width: 70px;
+       height: 70px;
+       border-radius: 50%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       
+   }
+   .phone, .email, .web a  {
+       text-decoration: none;
+   }
+   .phone i, .email i, .web i {
+       color: #fff;
+   }
+   
+   /* informacion */
+   .informacion {
+       width: 100%;
+       height: 100px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: flex-start;
+       gap: 12px;
+       font-family: "Poppins";
+       font-size: 1rem;
+       margin-top: 20px;
+       margin-bottom: 20px;
+   }
+   .informacion .info {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+	 color:#484848;
+   }
+   .informacion .info i {
+     font-size: 1rem;
+	 color:#484848;
+   }
+   .informacion .info i p {
+     font-size: 1rem;
+	 color:#484848;
+   }
+   /* Redes sociales */
+   .title-redes {
+       width: 50%;
+       height: 40px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       background-color: #484848;
+       color: white;
+       font-family: white;
+       margin-top: 15px;
+       margin-bottom: 15px;
+	   font-family: "Poppins";
+   }
+   .redes_sociales {
+       width: 100%;
+       height: 100px;
+       display: flex;
+       justify-content: space-evenly;
+       align-items: center;
+       margin-top: 20px;
+       margin-bottom:20px;
+   }
+   .redes_sociales .icon_redes {
+       width: 60px;
+       height: 60px;
+       border-radius: 50%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       background-color:  #484848;
+   }
+   .redes_sociales .icon_redes i {
+      color:#fff;
+   }
+   /* botones --------*/
+   .botones {
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content:space-evenly;
+       align-items: center;
+       position: sticky;
+       bottom: 0;
+   }
+   .botones div {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+      width: 100%;
+   }
+   .boton_guardar {
+       text-decoration: none;
+       text-align: center;
+       font-family: Poppins;
+       font-size: 1rem;
+       font-weight:300;
+       color: white;
+       width: 100%;
+       display: flex;
+       flex-direction: column;
+       justify-items: center;
+       align-items: center;
+       background-color: #484848;
+       padding: 10px;
+   }
+   
+/* modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s .9s;
+    --transform: translateY(-100vh);
+    --transition: transform .8s;
+}
+
+.modal_container {
+    margin: auto;
+    width: 90%;
+    max-width: 320px;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    transform: var(--transform);
+    transition: var(--transition);
+}
+
+.modal_close{
+    margin-top: 10px;
+    text-decoration: none;
+    color:var(--color-terciario);
+    font-family: var(--texto-principal);
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.6rem 0.7rem;
+    display:inline-block;
+    border-radius: 5px;
+    background-color: var(--color-principal);
+    transition: background-color 0.3s ease-in;
+}
+
+.modal--show {
+    opacity: 1;
+    pointer-events: unset;
+    transition: opacity 0.6s ease-in;
+    --transform: translateY(0);
+    --transition: transform .8s .8s;
+}
+.modal_content {
+    padding:30px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
+.modal_container h2 {
+    text-align: center;
+    font-family: var(--texto-principal);
+    color: var(--color-principal);
+}
+.modal_content a i {
+    color: var(--color-principal);
+}
+.modal_close:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-oscuro);
+}
+    
+   </style>
