@@ -37,5 +37,5 @@ export default defineConfig({
 			},
 		}),
 	],
-	base: 'https://reposocratech.github.io/PWA-Youtube/',
+	base: 'https://chelo67.github.io/astro-pwa/',
 })
