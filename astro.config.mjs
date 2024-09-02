@@ -5,6 +5,7 @@ import AstroPWA from '@vite-pwa/astro'
 export default defineConfig({
     site: 'https://chelo67.github.io',
     base: 'astro-pwa',
+	serviceWorker: true,
     integrations: [AstroPWA({
       manifest: {
 				display: 'standalone',
