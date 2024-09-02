@@ -37,5 +37,5 @@ export default defineConfig({
 			},
 		}),
 	],
-	base: 'https://chelo67.github.io/astro-pwa/',
+	base: 'astro-pwa',
 })
