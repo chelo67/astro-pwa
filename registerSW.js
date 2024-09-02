@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/https://reposocratech.github.io/PWA-Youtube/sw.js', { scope: '/https://reposocratech.github.io/PWA-Youtube/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/https://chelo67.github.io/astro-pwa/sw.js', { scope: '/https://chelo67.github.io/astro-pwa/' })})}
