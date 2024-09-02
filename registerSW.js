@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('https://chelo67.github.io/astro-pwa/sw.js', { scope: 'https://chelo67.github.io/astro-pwa/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/https://chelo67.github.io/astro-pwa/sw.js', { scope: '/https://chelo67.github.io/astro-pwa/' })})}
